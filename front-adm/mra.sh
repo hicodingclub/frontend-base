@@ -1,5 +1,5 @@
 
-~/dev/mean-rest/src/ui/angular-cli/bin/mra.js -m emailing -o src/app ../../backend/models/emailing/model.js
-~/dev/mean-rest/src/ui/angular-cli/bin/mra.js -m access -o src/app ../../backend/models/auth/model.access.js
-~/dev/mean-rest/src/ui/angular-cli/bin/mra.js -m roles -o src/app ../../backend/models/auth/model.role.js
-~/dev/mean-rest/src/ui/angular-cli/bin/mra.js -m files -o src/app ../../backend/models/files/sample.admin.js
+mra -m emailing -o src/app ../../backend-base/models/emailing/model.js
+mra -m access -o src/app ../../backend-base/models/auth/model.access.js
+mra -m roles -o src/app ../../backend-base/models/auth/model.role.js
+mra -m files -o src/app ../../backend-base/models/files/sample.admin.js
