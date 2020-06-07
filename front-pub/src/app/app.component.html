@@ -2,7 +2,7 @@
 	<nav class="navbar navbar-light navbar-expand-lg">
 		<a class="navbar-brand" routerLink="/">
 			<img src="assets/logo.png" align="left" class="logo">
-			<div class="logo-text mt-2">(Organization Name)</div>
+			<div class="logo-text mt-2">{{orgName}}</div>
 		</a>
 		
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarItems" aria-controls="navbarItems" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,9 +13,6 @@
 			<ul class="navbar-nav" data-toggle="collapse" data-target=".navbar-collapse.show">
 				<li class="nav-item">
 					<a class="nav-link" [ngClass]="{'active': currentUrl === '' || currentUrl === '/' }" routerLink="/">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" routerLinkActive="active" routerLink="/contact" >Contact</a>
 				</li>
 			</ul>
 		</div>
@@ -36,7 +33,7 @@
 
 <nav class="footer footer-font navbar navbar-light">
 	<div class="mx-auto mb-2 pt-2">
-		<div>© 2019 (Organization Name), Inc. All rights reserved.</div>
+		<div>© {{yyyy}} {{orgName}}. All rights reserved.</div>
 		<div class="contact-info">
 				<div class="ml-3 mr-5">
 					<i class="fas fa-phone"></i> (tel-number)

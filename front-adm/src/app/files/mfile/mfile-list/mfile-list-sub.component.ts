@@ -28,9 +28,11 @@ export class MfileListSubComponent extends MfileListComponent implements OnInit 
   }
 
   ngOnInit() {
-    
-      this.parentSchema = this.getParentRouteRefField();
-      let ref = this.referenceFieldsReverseMap[this.parentSchema];
+      this.clickItemAction = ''; // don't go to details or select by clicking the card/row.
+      this.adjustListViewForWindowSize();
+
+      let ref = this.getParentRouteRefField();
+      this.parentSchema = this.referenceFieldsReverseMap[ref];
 
       this.parentItemId = this.getParentRouteItemId();
       let id = this.parentItemId;

@@ -13,9 +13,9 @@ import { MaccountService } from '../maccount.service';
 })
 export class MaccountDetailFieldComponent extends MaccountComponent
         implements OnInit {
-    @Input() id: string;
-    @Input() detailObj: any;
-    @Input() showFieldsStr: string;
+    // @Input() id: string;
+    // @Input() detailObj: any;
+    // @Input() showFieldsStr: string;
     showFields: string[];
     
     constructor(
@@ -27,21 +27,23 @@ export class MaccountDetailFieldComponent extends MaccountComponent
           super(
                 maccountService, injector, router, route, location, ViewType.DETAIL);
           
+          this.fieldDisplayNames = {
+            'username': 'Username',
+            'email': 'Email',
+            'phone': 'Phone',
+            'firstname': 'Firstname',
+            'lastname': 'Lastname',
+            'since': 'Since',
+            'status': 'Status',
+          };
           this.enums['status'] = ['Enabled', 'Disabled', 'Pending', ];
-
           this.stringFields.push('username');
           this.stringFields.push('email');
           this.stringFields.push('phone');
+          this.stringFields.push('firstname');
+          this.stringFields.push('lastname');
           this.stringFields.push('status');
-
-
           this.dateFields = ['since', ];
-
-
-
-
-
-
     }
 
     ngOnInit() {

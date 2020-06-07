@@ -7,6 +7,11 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: 'emailing', loadChildren: () => import('./emailing/emailing.module').then(m => m.EmailingModule) },
+  { path: 'access', loadChildren: () => import('./access/access.module').then(m => m.AccessModule) },
+  { path: 'files', loadChildren: () => import('./files/files.module').then(m => m.FilesModule) },
+  { path: 'roles', loadChildren: () => import('./roles/roles.module').then(m => m.RolesModule) },
+
   { path: 'home',  component: HomeComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({

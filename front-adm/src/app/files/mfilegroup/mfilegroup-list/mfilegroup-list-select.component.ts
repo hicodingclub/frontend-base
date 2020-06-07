@@ -13,8 +13,8 @@ import { MfilegroupService } from '../mfilegroup.service';
 })
 export class MfilegroupListSelectComponent extends MfilegroupListComponent
         implements OnInit {
-    @Input() inputData;
-    @Output() outputData;
+    // @Input() inputData;
+    // @Output() outputData;
     done = new EventEmitter<boolean>();
 
     constructor(
@@ -26,6 +26,7 @@ export class MfilegroupListSelectComponent extends MfilegroupListComponent
         ) {
             super(mfilegroupService, injector, router, route, location);
             this.majorUi = false;
+            this.itemMultiSelect = false;
     }
 
     ngOnInit() {

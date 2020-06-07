@@ -13,8 +13,8 @@ import { MmoduleService } from '../mmodule.service';
 })
 export class MmoduleListSelectComponent extends MmoduleListComponent
         implements OnInit {
-    @Input() inputData;
-    @Output() outputData;
+    // @Input() inputData;
+    // @Output() outputData;
     done = new EventEmitter<boolean>();
 
     constructor(
@@ -26,6 +26,7 @@ export class MmoduleListSelectComponent extends MmoduleListComponent
         ) {
             super(mmoduleService, injector, router, route, location);
             this.majorUi = false;
+            this.itemMultiSelect = false;
     }
 
     ngOnInit() {

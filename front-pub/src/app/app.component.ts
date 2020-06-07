@@ -7,11 +7,15 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  public orgName: string = '(Organization Name)';
+  public yyyy: number;
 
   public currentUrl: string = '';
 
   constructor(private router: Router) {
+    this.yyyy = new Date().getFullYear();
+
+    // Google analytics
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.urlAfterRedirects) {

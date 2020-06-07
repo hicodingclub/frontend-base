@@ -42,6 +42,8 @@ packages=(
   "@hicoder\/angular-auth"
   "@hicoder\/angular-file"
   "@hicoder\/angular-richtext"
+  "@hicoder\/angular-shopping-framework"
+  "@hicoder\/angular-shopping-cart"
   "@hicoder\/express-emailing"
   "@hicoder\/express-auth-app"
   "@hicoder\/express-auth-server"

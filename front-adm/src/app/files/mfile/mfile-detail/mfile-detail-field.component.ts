@@ -13,9 +13,9 @@ import { MfileService } from '../mfile.service';
 })
 export class MfileDetailFieldComponent extends MfileComponent
         implements OnInit {
-    @Input() id: string;
-    @Input() detailObj: any;
-    @Input() showFieldsStr: string;
+    // @Input() id: string;
+    // @Input() detailObj: any;
+    // @Input() showFieldsStr: string;
     showFields: string[];
     
     constructor(
@@ -27,21 +27,23 @@ export class MfileDetailFieldComponent extends MfileComponent
           super(null,
                 mfileService, injector, router, route, location, ViewType.DETAIL);
           
-
+          this.fieldDisplayNames = {
+            'name': 'Name',
+            'type': 'Type',
+            'group': 'Group',
+            'labels': 'Labels',
+            'size': 'Size',
+            'link': 'Link',
+            'createdAt': 'Created at',
+            'hasThumbnail': 'Has Thumbnail',
+          };
           this.stringFields.push('name');
           this.stringFields.push('type');
           this.stringFields.push('link');
-
           this.referenceFields = ['group', ];
-
           this.dateFields = ['createdAt', ];
-
-
-
+          this.numberFields = ['size', ];
           this.arrayFields = [['labels', 'SchemaString'],];
-
-
-
     }
 
     ngOnInit() {

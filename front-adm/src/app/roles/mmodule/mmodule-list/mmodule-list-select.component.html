@@ -13,7 +13,7 @@
 
 	<div class="container search">
 		<div class="row">
-			<div class="col-9">
+			<div class="col">
 
 			    <div class="input-group">
 	              <input type="search" class="form-control border border-secondary" id="mmoduleTextSearch" 
@@ -43,30 +43,53 @@
 					<div class="card">
 						<div class="card-body">
 	    <div class="single-line-edit">
-	      <div class="row">
-	        <div class="col-3"><label for="mmoduleEditResources">Resources</label></div>
+	      <div class="row col-gutter">
+			<div class="col-3">
+				<label for="mmoduleEditResources">
+				Resources
+				</label>
+			</div>
 	        <div class="col-8">
 
 
 
 
-	        <ng-template [ngIf]="detail['resources'] && detail['resources']['selection']">
-	            <div class="badge badge-pill badge-secondary" *ngFor="let element of detail['resources']['selection']; let i = index;">
-	                      {{element}}
-				    <i class="fas fa-times-circle icon-clear-badge" (click)="clearValueFromArrayField('resources', i)" title="Remove"></i>
+			<div class="badge-group" *ngIf="detail['resources'] && detail['resources']['selection']">
+				<div class="badge badge-pill badge-secondary" *ngFor="let element of detail['resources']['selection']; let i = index;">
+					{{element}}
+					<i class="fas fa-times-circle icon-clear-badge" (click)="clearValueFromArrayField('resources', i)" title="Remove"></i>
 				</div>
-	        </ng-template>
-	
-	        <div class="input-group mt-3">
-	             <input type="search" class="form-control border"
-	             		id="mmoduleEditResourcesNew" #mmoduleEditResourcesNew
-					[(ngModel)]="detail['resources']['new']" [ngModelOptions]="{standalone: true}"
-					(keydown.enter)="$event.target.blur();onAddArrayItem('resources');false"
-				    > 
-			    <div class="input-group-append">
-			        <button type="button" class="btn btn-outline-secondary" (click)="onAddArrayItem('resources')"><i class="fas fa-plus"></i></button>
-			    </div>
 			</div>
+			<hr>
+	
+			<div class="available-hints">
+
+
+				<div class="mt-1">
+					<a class="pointer" routerLink="." (click)="onAddArrayItemClicked('resources')"
+						style="font-size: 0.75rem;">
+						<i class="fas fa-plus-square" title="New"></i>
+						New
+					</a>
+				</div>
+			</div>
+
+			<div *ngIf="detail['resources']['adding']" class="new-modal">
+				<div class="card text-center new-card">
+					<div class="card-body">
+					<input type="search" class="form-control border"
+						id="EditResourcesNew" #EditResourcesNew="ngModel"
+						[(ngModel)]="detail['resources']['new']" [ngModelOptions]="{standalone: true}"
+						(keydown.enter)="$event.target.blur();onAddArrayItem('resources');false"> 
+
+					<div class="d-flex my-3 justify-content-center">
+						<button class="btn btn-outline-primary mx-1" [disabled]="!EditResourcesNew.valid" (click)="onAddArrayItem('resources')">Confirm</button>
+						<button class="btn btn-outline-secondary mx-1" (click)="onAddArrayItemCancelled('resources')">Cancel</button>
+					</div>
+					</div>
+				</div>
+			</div>
+
 
  
 
@@ -101,7 +124,7 @@
 							</div>
 							<hr>
 
-							<div class="action-buttons" style="margin-top: 10px;">
+							<div class="action-buttons my-3" style="margin-top: 10px;">
 									<button type="button" class="btn btn-outline-success" (click)="onSearchClear()">Reset</button>
 									<button type="button" class="btn btn-success" (click)="searchList()">Search</button>
 							</div>
@@ -111,17 +134,15 @@
 		        <div *ngIf="!moreSearchOpened" style="text-align: left;">
 					<span class="badge badge-pill badge-info" *ngFor="let value of searchMoreDetail">
 					    <a (click)="toggleMoreSearch()" class="pointer"> {{value[0]}}: {{value[1]}}</a>
-					    <i class="fas fa-times-circle icon-clear-badge" (click)="clearValueFromDetailAndSearchList(value[0])" title="Clear"></i>
+					    <i class="fas fa-times-circle icon-clear-badge" (click)="clearValueFromDetailAndSearchList(value[2])" title="Clear"></i>
 					</span>
 				</div>
 		    
 
 			</div>
-			<div class="col-3">
-			</div>
 		</div>
 		<hr/>
-				<div class="row justify-content-end mt-3">
+		<div class="row justify-content-end mt-3">
 		
 			
 		</div>
@@ -131,41 +152,44 @@
 
 			<div>
 				<div class="total_counts">
-					<span *ngIf="list.length > 2">Total: <b>{{totalCount}}</b></span>
+					<span *ngIf="totalCount > 2">Total: <b>{{totalCount}}</b></span>
 				</div>
 			</div>
 		</div>
 
-		<div class="d-flex justify-content-center mt-2">
-				<div *ngIf="totalPages > 1">
-					<ul class="pagination justify-content-center">
-						<li class="page-item"
-								[ngClass]="{'disabled': page<=1}">
-						<a class="page-link" routerLink="." (click)="onPreviousPage()"
-							aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-							<span class="sr-only">Previous</span>
-						</a>
-						</li>
+		<div class="d-flex justify-content-center flex-wrap mt-2">
+			<div *ngIf="totalPages > 1">
+				<ul class="pagination justify-content-center">
+					<li class="page-item"
+							[ngClass]="{'disabled': page<=1}">
+					<a class="page-link" routerLink="." (click)="onPreviousPage()"
+						aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+						<span class="sr-only">Previous</span>
+					</a>
+					</li>
 
-						<li *ngIf="leftMore" class="page-item"><a class="page-link">...</a></li>
+					<li *ngIf="leftMore" class="page-item"><a class="page-link">...</a></li>
 
-						<li *ngFor="let p of pages;  let i = index" class="page-item"
-								[ngClass]="{'active': p==page}">
-							<a class="page-link" routerLink="." (click)="onGotoPage(p)">{{p}}</a>
-						</li>
+					<li *ngFor="let p of pages;  let i = index" class="page-item"
+							[ngClass]="{'active': p==page}">
+						<a class="page-link" routerLink="." (click)="onGotoPage(p)">{{p}}</a>
+					</li>
 
-						<li *ngIf="rightMore" class="page-item"><a class="page-link">...</a></li>
-						<li class="page-item"
-								[ngClass]="{'disabled': page>=totalPages}">
-						<a class="page-link" routerLink="." (click)="onNextPage()"
-							aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-							<span class="sr-only">Next</span>
-						</a>
-						</li>
-					</ul>
-				</div>
+					<li *ngIf="rightMore" class="page-item"><a class="page-link">...</a></li>
+					<li class="page-item"
+							[ngClass]="{'disabled': page>=totalPages}">
+					<a class="page-link" routerLink="." (click)="onNextPage()"
+						aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+						<span class="sr-only">Next</span>
+					</a>
+					</li>
+				</ul>
+			</div>
+			<div class="ml-3" *ngIf="totalPages > 1">
+				<small>Page</small>&nbsp;<input type="number" class="page-control form-control" [value]="page" (input)="onGotoPage($event.target.value)" />&nbsp;/&nbsp;{{totalPages}}
+			</div>
 		</div>
 
 	</div>
@@ -186,11 +210,10 @@
 	        	[ngClass]="{'clicked-row': detail['_id']==clickedId}" >
 	            <td scope="row" (click)="selectItemSelected(i)"  class="pointer">{{(page-1)*perPage+i+1}}</td>
 
-	            <td (click)="selectItemSelected(i)"  class="pointer">                
+	            <td (click)="selectItemSelected(i)"  class="pointer">
                     {{detail['module']}}
-
 	            </td>
-	            <td (click)="selectItemSelected(i)"  class="pointer">                
+	            <td (click)="selectItemSelected(i)"  class="pointer">
                     <div *ngIf="detail['resources'] && detail['resources']['selection']">
                         <ng-template ngFor let-element [ngForOf]="detail['resources']['selection']" let-idx="index">
                             <div class="badge badge-pill badge-secondary">
@@ -198,11 +221,11 @@
                             </div>
                         </ng-template>
                     </div>
-
 	            </td>
 
 	            <td><a routerLink="." class="btn" 
-	                 [ngClass]="{'btn-primary': detail['_id']==selectedId, 'btn-outline-primary': detail['_id']!==selectedId}"
+					 [ngClass]="{'btn-primary': detail['_id']==selectedId || checkedItem[i], 
+					 			'btn-outline-primary': detail['_id']!==selectedId && !checkedItem[i]}"
 	            	 (click)="selectViewDetail(i)">View Details</a>
 	            </td>
 	        </tr>
@@ -210,7 +233,7 @@
 	</table>
 	
 	<div class="container">
-				<div class="row justify-content-end mt-3">
+		<div class="row justify-content-end mt-3">
 		
 			
 		</div>
@@ -220,46 +243,47 @@
 
 			<div>
 				<div class="total_counts">
-					<span *ngIf="list.length > 2">Total: <b>{{totalCount}}</b></span>
+					<span *ngIf="totalCount > 2">Total: <b>{{totalCount}}</b></span>
 				</div>
 			</div>
 		</div>
 
-		<div class="d-flex justify-content-center mt-2">
-				<div *ngIf="totalPages > 1">
-					<ul class="pagination justify-content-center">
-						<li class="page-item"
-								[ngClass]="{'disabled': page<=1}">
-						<a class="page-link" routerLink="." (click)="onPreviousPage()"
-							aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-							<span class="sr-only">Previous</span>
-						</a>
-						</li>
+		<div class="d-flex justify-content-center flex-wrap mt-2">
+			<div *ngIf="totalPages > 1">
+				<ul class="pagination justify-content-center">
+					<li class="page-item"
+							[ngClass]="{'disabled': page<=1}">
+					<a class="page-link" routerLink="." (click)="onPreviousPage()"
+						aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+						<span class="sr-only">Previous</span>
+					</a>
+					</li>
 
-						<li *ngIf="leftMore" class="page-item"><a class="page-link">...</a></li>
+					<li *ngIf="leftMore" class="page-item"><a class="page-link">...</a></li>
 
-						<li *ngFor="let p of pages;  let i = index" class="page-item"
-								[ngClass]="{'active': p==page}">
-							<a class="page-link" routerLink="." (click)="onGotoPage(p)">{{p}}</a>
-						</li>
+					<li *ngFor="let p of pages;  let i = index" class="page-item"
+							[ngClass]="{'active': p==page}">
+						<a class="page-link" routerLink="." (click)="onGotoPage(p)">{{p}}</a>
+					</li>
 
-						<li *ngIf="rightMore" class="page-item"><a class="page-link">...</a></li>
-						<li class="page-item"
-								[ngClass]="{'disabled': page>=totalPages}">
-						<a class="page-link" routerLink="." (click)="onNextPage()"
-							aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-							<span class="sr-only">Next</span>
-						</a>
-						</li>
-					</ul>
-				</div>
+					<li *ngIf="rightMore" class="page-item"><a class="page-link">...</a></li>
+					<li class="page-item"
+							[ngClass]="{'disabled': page>=totalPages}">
+					<a class="page-link" routerLink="." (click)="onNextPage()"
+						aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+						<span class="sr-only">Next</span>
+					</a>
+					</li>
+				</ul>
+			</div>
+			<div class="ml-3" *ngIf="totalPages > 1">
+				<small>Page</small>&nbsp;<input type="number" class="page-control form-control" [value]="page" (input)="onGotoPage($event.target.value)" />&nbsp;/&nbsp;{{totalPages}}
+			</div>
 		</div>
 
 	</div>
-	
-
 <!--  model body ends -->
 
       </div>

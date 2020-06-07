@@ -13,8 +13,8 @@ import { MaccountService } from '../maccount.service';
 })
 export class MaccountListSelectComponent extends MaccountListComponent
         implements OnInit {
-    @Input() inputData;
-    @Output() outputData;
+    // @Input() inputData;
+    // @Output() outputData;
     done = new EventEmitter<boolean>();
 
     constructor(
@@ -26,6 +26,7 @@ export class MaccountListSelectComponent extends MaccountListComponent
         ) {
             super(maccountService, injector, router, route, location);
             this.majorUi = false;
+            this.itemMultiSelect = false;
     }
 
     ngOnInit() {

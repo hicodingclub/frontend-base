@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'front-new';
+  public orgName: string = '(Organization Name)';
+  public yyyy: number;
+
+  constructor() {
+    this.yyyy = new Date().getFullYear();
+  }
 }

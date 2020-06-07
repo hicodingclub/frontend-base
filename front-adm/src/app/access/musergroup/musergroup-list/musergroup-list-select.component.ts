@@ -13,8 +13,8 @@ import { MusergroupService } from '../musergroup.service';
 })
 export class MusergroupListSelectComponent extends MusergroupListComponent
         implements OnInit {
-    @Input() inputData;
-    @Output() outputData;
+    // @Input() inputData;
+    // @Output() outputData;
     done = new EventEmitter<boolean>();
 
     constructor(
@@ -26,6 +26,7 @@ export class MusergroupListSelectComponent extends MusergroupListComponent
         ) {
             super(musergroupService, injector, router, route, location);
             this.majorUi = false;
+            this.itemMultiSelect = false;
     }
 
     ngOnInit() {

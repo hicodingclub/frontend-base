@@ -13,8 +13,8 @@ import { MpubmoduleService } from '../mpubmodule.service';
 })
 export class MpubmoduleListSelectComponent extends MpubmoduleListComponent
         implements OnInit {
-    @Input() inputData;
-    @Output() outputData;
+    // @Input() inputData;
+    // @Output() outputData;
     done = new EventEmitter<boolean>();
 
     constructor(
@@ -26,6 +26,7 @@ export class MpubmoduleListSelectComponent extends MpubmoduleListComponent
         ) {
             super(mpubmoduleService, injector, router, route, location);
             this.majorUi = false;
+            this.itemMultiSelect = false;
     }
 
     ngOnInit() {

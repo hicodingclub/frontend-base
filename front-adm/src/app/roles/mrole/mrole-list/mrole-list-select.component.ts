@@ -13,8 +13,8 @@ import { MroleService } from '../mrole.service';
 })
 export class MroleListSelectComponent extends MroleListComponent
         implements OnInit {
-    @Input() inputData;
-    @Output() outputData;
+    // @Input() inputData;
+    // @Output() outputData;
     done = new EventEmitter<boolean>();
 
     constructor(
@@ -26,6 +26,7 @@ export class MroleListSelectComponent extends MroleListComponent
         ) {
             super(mroleService, injector, router, route, location);
             this.majorUi = false;
+            this.itemMultiSelect = false;
     }
 
     ngOnInit() {

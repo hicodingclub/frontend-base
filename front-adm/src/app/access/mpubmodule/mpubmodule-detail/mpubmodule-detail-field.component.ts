@@ -13,9 +13,9 @@ import { MpubmoduleService } from '../mpubmodule.service';
 })
 export class MpubmoduleDetailFieldComponent extends MpubmoduleComponent
         implements OnInit {
-    @Input() id: string;
-    @Input() detailObj: any;
-    @Input() showFieldsStr: string;
+    // @Input() id: string;
+    // @Input() detailObj: any;
+    // @Input() showFieldsStr: string;
     showFields: string[];
     
     constructor(
@@ -27,17 +27,12 @@ export class MpubmoduleDetailFieldComponent extends MpubmoduleComponent
           super(
                 mpubmoduleService, injector, router, route, location, ViewType.DETAIL);
           
-
+          this.fieldDisplayNames = {
+            'module': 'Module',
+            'resources': 'Resources',
+          };
           this.stringFields.push('module');
-
-
-
-
-
           this.arrayFields = [['resources', 'SchemaString'],];
-
-
-
     }
 
     ngOnInit() {
