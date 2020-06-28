@@ -50,7 +50,7 @@ export const AccessRoutes: Routes = [
     children: AccessRoutingCustPath,
   },
 ];/*>>> Please check this recent updates and merge with existing ones***
-**Date: Wed Jun 24 2020 11:29:24 GMT-0700 (Pacific Daylight Time)
+**Date: Sun Jun 28 2020 13:20:43 GMT-0700 (Pacific Daylight Time)
 
 import { Routes } from '@angular/router';
 

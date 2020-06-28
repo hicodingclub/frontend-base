@@ -5,7 +5,7 @@ import { EmailqueueComponent } from '../../../emailing/emailqueue/emailqueue.com
 export class EmailqueueEditCustComponent extends EmailqueueComponent {        
 }
 /*>>> Please check this recent updates and merge with existing ones***
-**Date: Wed Jun 24 2020 11:29:23 GMT-0700 (Pacific Daylight Time)
+**Date: Sun Jun 28 2020 13:20:41 GMT-0700 (Pacific Daylight Time)
 
 import { Input } from '@angular/core';
 
