@@ -60,7 +60,7 @@ export const RolesRoutes: Routes = [
     children: RolesRoutingCustPath,
   },
 ];/*>>> Please check this recent updates and merge with existing ones***
-**Date: Sun Jun 28 2020 13:20:44 GMT-0700 (Pacific Daylight Time)
+**Date: Fri Jul 03 2020 16:17:15 GMT-0700 (Pacific Daylight Time)
 
 import { Routes } from '@angular/router';
 
